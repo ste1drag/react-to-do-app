@@ -19,7 +19,6 @@ class Card extends React.Component{
                 <textarea name={this.props.name} id={this.props.id} cols="20" rows="10">
                     {this.props.task}
                 </textarea>
-                <button onClick={this.onDelete}>Delete</button>
             </div>
         )
     }
