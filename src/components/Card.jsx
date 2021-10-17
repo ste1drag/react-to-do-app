@@ -12,13 +12,15 @@ class Card extends React.Component{
 
     render(){
         return(
-            <div>
+            <div style={{backgroundColor:'#C0BAFA', width:'20%', padding:'25px',borderRadius:'15px'}}>
+                <div style={{backgroundColor:'#D6F0FA', padding:'25px',borderRadius:'15px'}}>
                 <h1>
                     {this.props.title}
                 </h1>
-                <textarea name={this.props.name} id={this.props.id} cols="20" rows="10">
+                <hr />
                     {this.props.task}
-                </textarea>
+                
+                </div>
             </div>
         )
     }

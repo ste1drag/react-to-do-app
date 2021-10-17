@@ -10,7 +10,7 @@ class Grid extends React.Component{
         });
 
         return (
-                <div>
+                <div style={{marginTop:'20px'}}>
                     {rows}
                 </div>
                     
