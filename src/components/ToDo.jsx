@@ -39,7 +39,11 @@ class ToDo extends React.Component{
   render(){
     return (
       <div>
-            <h1>REACT TO-DO APP</h1>
+
+      <h1>REACT TO-DO APP</h1>
+      <div style={{display:'inline-flex'}}>
+            
+            <div style={{position:'relative'}}>
             <AddToDo 
             handleChangeTitle={(val)=>{
                 this.setState({titleText:val});
@@ -49,7 +53,6 @@ class ToDo extends React.Component{
             }} 
             onClickButtonChange={
                 ()=>{
-                    console.log('Bilo sta');
                     this.setState({
                         cards:[...this.state.cards,{name:'task'+this.state.counter,id:this.state.counter,title:this.state.titleText,task:this.state.taskText}],
                         titleText:'',
@@ -57,10 +60,22 @@ class ToDo extends React.Component{
                         counter:this.state.counter+1
                     });
                 }
-            } 
+            }
+            onDeleteChange={
+              ()=>{
+                
+              }
+            }
             />
+            </div>
+            <div style={{marginLeft:'350px'}}>
             <Grid cards={this.state.cards} />
+            </div>
+            
+        </div>
+
       </div>
+      
     );
   }
 }
