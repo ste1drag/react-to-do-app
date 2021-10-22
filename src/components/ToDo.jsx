@@ -1,6 +1,6 @@
 import React from 'react';
 import AddToDo from './AddToDo';
-import Grid from './Grid';
+import Card from './Card';
 
 class ToDo extends React.Component{
 
@@ -12,31 +12,36 @@ class ToDo extends React.Component{
       counter:0,
       cards:[]
     }
+    this.addCard=this.addCard.bind(this);
+    this.deleteCard=this.deleteCard.bind(this);
     
   }
-/*
-  titleChange(val){
-    this.setState({titleText:val});
-  }
 
-  taskChange(val){
-    this.setState({taskText:val});
-  }
-*/
 
   addCard(){
-    console.log('Bilo sta');
-    this.setState({
-      cards:[...this.state.cards,{name:'task'+this.state.counter,id:this.state.counter,title:this.state.titleText,task:this.state.taskText}],
+    this.setState(prevState=>{
+      return {
+      cards:[...prevState.cards,{id:prevState.counter,title:prevState.titleText,taskText:prevState.taskText}],
       titleText:'',
       taskText:'',
-      counter:this.state.counter+1
+      counter:prevState.counter+1
+      }
     });
-  
+  }
 
+  deleteCard(id){
+    this.setState(prevState=>{
+      return{
+        cards:prevState.cards.filter(card=>card.id!==id)
+      }
+    })
   }
   
   render(){
+    let rows=[];
+    this.state.cards.map((card=>{
+      rows.push(<Card id={card.id} key={card.id} title={card.title} task={card.taskText} onDeleteChange={()=>this.deleteCard(card.id)}/>)
+    }));
     return (
       <div>
 
@@ -52,24 +57,14 @@ class ToDo extends React.Component{
                 this.setState({taskText:val});
             }} 
             onClickButtonChange={
-                ()=>{
-                    this.setState({
-                        cards:[...this.state.cards,{name:'task'+this.state.counter,id:this.state.counter,title:this.state.titleText,task:this.state.taskText}],
-                        titleText:'',
-                        taskText:'',
-                        counter:this.state.counter+1
-                    });
-                }
-            }
-            onDeleteChange={
-              ()=>{
-                
-              }
+                ()=>this.addCard()
             }
             />
             </div>
             <div style={{marginLeft:'350px'}}>
-            <Grid cards={this.state.cards} />
+              <div style={{marginTop:'20px'}}>
+                {rows}
+              </div>
             </div>
             
         </div>
